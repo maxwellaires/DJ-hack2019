@@ -6,6 +6,8 @@ import json
 import re
 import sys
 
+
+
 def buildRatings(songs):
     ratings = dict([(song,0) for song in songs])
     f = open("/usr/lib/data/info.json","wt")

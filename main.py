@@ -1,14 +1,34 @@
 #!/usr/bin/python
 
 import os
+import json
 
-info = ["Yellow Submarine","Boulevard of Broken Dreams","THRILLER","Fireworks"]
-ratings = [0,0,0,0]
+songs = ["Yellow Submarine","Boulevard of Broken Dreams","THRILLER","Fireworks"]
+
+
+def buildRatings(songs):
+    ratings = dict([(song,0) for song in songs]))
+    f = open("info.json","wt")
+    f.write(json.dumps(info))
+    f.close()
+    return ratings
+
+
+
 
 def main(data):
 	f = open("/var/www/html/index.html","rt")
 	website = f.read()
 	f.close()
+
+        f = open("info.json","rt")
+        ratings = f.read()
+        f.close()
+        
+        if ratings = "":
+            ratings = buildRatings(songs)
+        else:
+            ratings = json.loads(ratings)
 
 	print("Content-type: text/html\n\n")
 	if data==None:
@@ -18,11 +38,9 @@ def main(data):
 			ratings[2] += 1
 #		pass
 
-	website = website.replace("?1",info[0] + " " + str(ratings[0]))
-	website = website.replace("?2",info[1] + " " + str(ratings[1]))
-	website = website.replace("?3",info[2] + " " + str(ratings[2]))
-	website = website.replace("?4",info[3] + " " + str(ratings[3]))
-	print(website)
+	
+        for 
+        print(website)
 
 
 if __name__ == "__main__":

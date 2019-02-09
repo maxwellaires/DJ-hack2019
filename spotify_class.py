@@ -187,31 +187,74 @@ class Spotify_Client(object):
         '''
         adds the given track one under consideration - up to 20.
         '''
+        # get the track object
+        url = "https://api.spotify.com/v1/tracks/%s" % track_uri
+        header = {
+                'Authorization' : self.auth_bearer
+                }
+        r = requests.get(url, headers=header)
 
-        # add track to the dictionary file
-        fhand = open("info.json", "w+")
-        contents = fhand.read()
-        #  data = json.loads(contents)
-        pprint(contents)
-        pass
+        if r.status_code != 200:
+            1/0
+            #  TODO: fill in this part # 
 
-    def pick_next_song(self, track_file):
+        title = json.loads(r.content)['name']
+
+        with open('info.json', "rw") as infofile:
+            d = json.load(infofile)
+
+            d = self.remove_song(d)
+
+            d['tracks'][title] = uri
+            d['votes'][title] = { "SUM" : 0 }
+            json.dump(d, infofile)
+
+    def remove_song(self, d):
+        '''
+        removes a song from the dictionary d if needed
+        '''
+        length = len(d['tracks'].keys())
+        if length == 20:
+            smallest = min([d['votes'][song]['SUM'] for song in
+                d['tracks'].keys()])
+            for song in d['tracks'].keys():
+                if d['votes'][song]['SUM'] == smallest:
+                    del d['votes'][song]
+                    del d['tracks'][song]
+                    break
+        return d
+
+    def pick_next_song(self):
         '''
         looks at at the json file and then picks the next song based on the max
         number of upvotes
 
-        returns the corresponding track uri
+        returns the corresponding track object
         '''
-        pass
+        with open('info.json', "rw") as infofile:
+            d = json.load(infofile)
+            
+            largest = max([d['votes'][song]['SUM'] for song in
+                d['tracks'].keys()])
+            for song in d['tracks'].keys():
+                if d['votes'][song][SUM] == largest:
+                    track_uri = d['tracks'][song]
+                    del d['tracks'][song]
+                    del d['votes'][song]
+                    break
 
+        track_id = track_uri[string.find(track_uri, ":", 2) + 1:]
+        # get the track object
+        header = {
+                'Authorization' : self.auth_bearer
+                }
+        url = 'https://api.spotify.com/v1/tracks/%s' % track_id
+        r = requests.get(url, headers = header)
+        if r.status_code != 200:
+            1/0
+            #  TODO: fill in this part # 
 
-        '''
-        TBD
-            - currently playing
-            - pick upcoming song.
-            - store tracks in json.
-        '''
-
+        return r.content
 
     def search_for_track(self, search_string):
         '''
@@ -235,6 +278,27 @@ class Spotify_Client(object):
 
         return results
         
+    def currently_playing(self):
+        """
+        returns the currently playing song as a string
+
+        """
+        header = {
+                'Authorization' : self.auth_bearer
+                }
+        url = 'https://api.spotify.com/v1/me/player/currently-playing'
+        requests.get(url, headers = header)
+        d = json.loads(r.content)
+        title = ""
+        if d['is_playing']:
+            title = d['item']['name']
+
+        return title
+
+    def next_song(self):
+        """
+        returns the next song as a string
+        """
 
 
 

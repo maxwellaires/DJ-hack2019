@@ -1,8 +1,8 @@
 import os
 
-
-website = with open("~/var/www/html/index.html",rwt) as file): f.read()
-
+f = open("/var/www/html/index.html","rt") 
+website = f.read()
+f.close()
 
 
 

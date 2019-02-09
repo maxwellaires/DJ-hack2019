@@ -199,7 +199,7 @@ class Spotify_Client(object):
         Returns a list of (song,artist,uri) for top 10 results 
         '''
         header = {"Authorization" : self.auth_bearer}
-        payload = { 'q' : search_string.replace(" ","%20"),
+        payload = { 'q' : search_string.replace(" ","+"),
                     'type' : 'track',
                     'limit' : 10}
 

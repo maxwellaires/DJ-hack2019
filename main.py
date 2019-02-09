@@ -33,16 +33,11 @@ def main(data):
     else:
             website = website.replace("?11",data)
 
-    website = website.replace("?01",songs[0])
-    website = website.replace("?02",songs[1])
-    website = website.replace("?03",songs[2])
-    website = website.replace("?04",songs[3])
-    website = website.replace("?05",songs[4])
-    website = website.replace("?06",str(ratings[0]))
-    website = website.replace("?07",str(ratings[1]))
-    website = website.replace("?08",str(ratings[2]))
-    website = website.replace("?09",str(ratings[3]))
-    website = website.replace("?10",str(ratings[4]))
+    sortedRatings = sorted(ratings.items(),key=lambda x:x[1])
+    for (song,rating),count in zip(sortedRatings,range(len(sortedRatings)):
+        website = website.replace(f"??SONG{count}",song)
+        website = website.replace(f"??RAT{count}",rating)
+
     print(website)
 
 

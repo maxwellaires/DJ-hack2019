@@ -82,6 +82,7 @@ def main(data):
     f.close()
 
     print(website)
+    print("<META HTTP-EQUIV=refresh; CONTENT='0;URL=http://localhost/cgi-bin/main.py' />")
 
 
 if __name__ == "__main__":

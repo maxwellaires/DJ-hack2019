@@ -60,30 +60,31 @@ div.playlist_text {
 	font-size: 100%;
 	text-align: center;
 }
-div.playlist_text pre {
-	margin: 8px 0px 8px 0px;
-	padding: 8px 8px 8px 8px;
-	font-style: italic;
-}
 div.playlist_text p {
 	margin-bottom: 6px;
-}
-.button {
-	background-color: #4CAF50;
-	border: none;
-	color: white;
-	padding: 15px 25px;
-	text-align: center;
-	font-size: 16px;
-	cursor: pointer;
-}
-.button:hover {
-	background-color: green;
 }
 
 .floating_element {
 	position: relative;
 	float: left;
+}
+
+table {
+	width: 100%
+}
+form.updown {
+    display: inline-block;  
+}
+button {
+	background-color: #5555CC;
+	border: none;
+	color: white;
+	padding: 4px 4px;
+	text-align: center;
+	cursor: pointer;
+}
+button:hover {
+	background-color: #bbbbff;
 }
 
 div.content_section_text a:link,
@@ -112,11 +113,43 @@ div.content_section_text a:hover {
             Spotify Playlist
         </div>
         <div class="playlist_text">
-			<p> ?1 <button type="button" action="/cgi-bin/main.py">^</button></p> 
-			<p> ?2 </p>
-			<p> ?3 <form action="/cgi-bin/main.py"><button type="submit" name="b2" value="UP">^</button></form> </p>
-			<p> ?4 </p>
-			<p> ?5 </p>
+			<table>
+				<tr>
+					<td><form class="updown" action="/cgi-bin/main.py"> ?06
+							<button class="up" type="submit" name="b0" value="UP">^</button>
+							<button type="submit" name="b0" value="DOWN">v</button></form> </td>
+					<td>?01</td>
+				</tr>
+				<tr>
+					<td><form class="updown" action="/cgi-bin/main.py"> ?07
+							<button class="up" type="submit" name="b1" value="UP">^</button>
+							<button type="submit" name="b1" value="DOWN">v</button></form> </td>
+					<td>?02</td>
+				</tr>
+				<tr>
+					<td><form class="updown" action="/cgi-bin/main.py"> ?08
+							<button class="up" type="submit" name="b2" value="UP">^</button>
+							<button type="submit" name="b2" value="DOWN">v</button></form> </td>
+					<td>?03</td>
+				</tr>
+				<tr>
+					<td><form class="updown" action="/cgi-bin/main.py"> ?09
+							<button class="up" type="submit" name="b3" value="UP">^</button>
+							<button type="submit" name="b3" value="DOWN">v</button></form> </td>
+					<td>?04</td>
+				</tr>
+				<tr>
+					<td><form class="updown" action="/cgi-bin/main.py"> ?10
+							<button class="up" type="submit" name="b4" value="UP">^</button>
+							<button type="submit" name="b4" value="DOWN">v</button></form> </td>
+					<td>?05</td>
+				</tr>
+			</table>
+			<p><form action="/cgi-bin/main.py">
+					<input type="text" name="song">
+					<button class="up" type="submit" name="add" value="ADD">ADD</button></form>
+			</p>
+			?11
 		</div>
 	</div>
 </div>

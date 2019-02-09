@@ -1,14 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os
 import json
-
-songs = ["Yellow Submarine","Boulevard of Broken Dreams","THRILLER","Fireworks","Clocks"]
-rating = [0,0,0,0,0]
+import re
 
 def buildRatings(songs):
     ratings = dict([(song,0) for song in songs])
-    f = open("info.json","wt")
+    f = open("/usr/lib/data/info.json","wt")
     f.write(json.dumps(ratings))
     f.close()
     return ratings
@@ -18,25 +16,42 @@ def main(data):
     website = f.read()
     f.close()
 
-    f = open("info.json","rt")
+    f = open("/usr/lib/data/info.json","rt")    
     ratings = f.read()
-    f.close()
-        
     if ratings == "":
-        ratings = buildRatings(songs)
-    else:
+        ratings = {"HI" : 1, "BYE" : 2, "SHOE" : 0, "GOO" : 5}
+    else: 
         ratings = json.loads(ratings)
+    f.close()
 
     print("Content-type: text/html\n\n")
-    if data==None:
+    if data == None:
         pass
     else:
-            website = website.replace("?11",data)
+        args = re.split("[=&]", data)
+        args[0] = (args[0]).replace("+", " ")
+        args[1] = (args[1]).replace("+", " ")
+        if len(args) > 2:
+            ratings[args[1]] = 0
+        if args[1] == "UP":
+            ratings[args[0]] += 1
+        elif args[1] == "DOWN":
+            ratings[args[0]] -= 1
 
-    sortedRatings = sorted(ratings.items(),key=lambda x:x[1])
+    sortedRatings = (sorted(ratings.items(),key=lambda x:x[1]))
+    sortedRatings.reverse()
     for (song,rating),count in zip(sortedRatings,range(len(sortedRatings))):
-        website = website.replace(f"??SONG{count}",song)
-        website = website.replace(f"??RAT{count}",str(rating))
+        website = website.replace("<!--ADDTOPLAY-->",  
+			f'<tr><td><form class="updown" action="/cgi-bin/main.py"> {rating} ' +
+		    f'<button class="up" type="submit" name="{song}" value="UP">^</button> ' +
+			f'<button type="submit" name="{song}" value="DOWN">v</button></form></td>' +
+            f"<td>{song}</td></tr>" + "<!--ADDTOPLAY-->")
+					
+
+    f = open("/usr/lib/data/info.json","w")
+    f.truncate(0)
+    f.write(json.dumps(ratings))
+    f.close()
 
     print(website)
 

@@ -15,12 +15,14 @@ body, html {
 	padding: 3px 3px 3px 3px;
 	background-color: #cceeff;
 	font-family: Verdana, sans-serif;
-	font-size: 12pt;
 	text-align: center;
+	font-size: 16pt;	
 }
+
 div.main_page {
 	position: relative;
 	display: table;
+	
 	width: 800px;
 
 	margin-left: auto;
@@ -32,12 +34,12 @@ div.main_page {
 	border-style: solid;
 }
 div.page_header {
-	height: 50px;
+	height: 80px;
     width: 100%;
     background-color: #DDDDFF;
 }
 div.page_header span {
-    font-size: 240%;
+    font-size: 300%;
     font-weight: bold;
 	text-align: center;
 	color: #000055;
@@ -50,7 +52,7 @@ div.playlist_header {
 	background-color: #444499;
 	color: #DDDDFF;
 	font-weight: bold;
-	font-size: 115%;
+	font-size: 140%;
 	text-align: center;
 }
 div.playlist_text {
@@ -79,9 +81,12 @@ button {
 	background-color: #5555CC;
 	border: none;
 	color: white;
-	padding: 4px 4px;
+	padding: 3px 12px;
 	text-align: center;
 	cursor: pointer;
+}
+button.selected{
+	background-color: #AA0000;
 }
 button:hover {
 	background-color: #bbbbff;
@@ -97,6 +102,18 @@ div.content_section_text a:active {
 div.content_section_text a:hover {
 	background-color: #000000;
 	color: #DCDFE6;
+}
+
+@media screen and (max-width:1000px) {
+	body,html {
+		font-size: 18pt;
+	}
+	div.main_page {
+		width: 400px;
+	}
+	div.page_header {
+		height: 175px;
+	}
 }
 
 </style>
@@ -124,7 +141,7 @@ div.content_section_text a:hover {
 			</table>
 			<p><form action="/cgi-bin/main.py">
 					<input type="text" name="song">
-					<button class="up" type="submit" name="add" value="ADD">ADD</button></form>
+					<button type="submit" name="add" value="ADD">ADD</button></form>
 			</p>
 			?11,   ?12
 		</div>

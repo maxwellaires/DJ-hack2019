@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import cgi
 import os
 import json
 import re
@@ -24,27 +25,54 @@ def main(data):
         ratings = json.loads(ratings)
     f.close()
 
+    user = cgi.escape(os.environ["REMOTE_ADDR"])
+    website = website.replace("?11", user)  
+
     print("Content-type: text/html\n\n")
     if data == None:
         pass
     else:
         args = re.split("[=&]", data)
-        args[0] = (args[0]).replace("+", " ")
+        song = (args[0]).replace("+", " ")
         args[1] = (args[1]).replace("+", " ")
         if len(args) > 2:
-            ratings[args[1]] = 0
+           ratings[args[1]] = {"SUM" : 0}
         if args[1] == "UP":
-            ratings[args[0]] += 1
+            if user not in ratings[song]:
+                (ratings[song])["SUM"] += 1
+                (ratings[song])[user] = 1
+            elif (ratings[song])[user] == -1:
+                (ratings[song])["SUM"] += 2
+                (ratings[song])[user] = 1
+            elif (ratings[song])[user] == 1:
+                (ratings[song])["SUM"] -= 1
+                del (ratings[song])[user]
         elif args[1] == "DOWN":
-            ratings[args[0]] -= 1
+            if user not in ratings[song]:
+                (ratings[song])["SUM"] -= 1
+                (ratings[song])[user] = -1
+            elif (ratings[song])[user] == 1:
+                (ratings[song])["SUM"] -= 2
+                (ratings[song])[user] = -1
+            elif (ratings[song])[user] == -1:
+                (ratings[song])["SUM"] += 1
+                del (ratings[song])[user]
 
-    sortedRatings = (sorted(ratings.items(),key=lambda x:x[1]))
+    sortedRatings = (sorted(ratings.items(),key=lambda x:x[1]["SUM"]))
     sortedRatings.reverse()
-    for (song,rating),count in zip(sortedRatings,range(len(sortedRatings))):
+    for (song,sr) in sortedRatings:
+        rating = sr["SUM"]
+        upselect = ""
+        downselect = ""
+        if user in sr:
+            if sr[user] == 1:
+                upselect = ' class = "selected" '
+            else:
+                downselect = ' class = "selected" '
         website = website.replace("<!--ADDTOPLAY-->",  
 			f'<tr><td><form class="updown" action="/cgi-bin/main.py"> {rating} ' +
-		    f'<button class="up" type="submit" name="{song}" value="UP">^</button> ' +
-			f'<button type="submit" name="{song}" value="DOWN">v</button></form></td>' +
+		    '<button ' + upselect + f'type="submit" name="{song}" value="UP">^</button> ' +
+			'<button ' + downselect + f'type="submit" name="{song}" value="DOWN">v</button></form></td>' +
             f"<td>{song}</td></tr>" + "<!--ADDTOPLAY-->")
 					
 

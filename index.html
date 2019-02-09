@@ -13,7 +13,7 @@
 
 body, html {
 	padding: 3px 3px 3px 3px;
-	background-color: #ccddff;
+	background-color: #cceeff;
 	font-family: Verdana, sans-serif;
 	font-size: 12pt;
 	text-align: center;
@@ -65,14 +65,21 @@ div.playlist_text pre {
 	padding: 8px 8px 8px 8px;
 	font-style: italic;
 }
-
-  div.playlist_text p {
-    margin-bottom: 6px;
-  }
-
-  div.content_section_text ul, div.content_section_text li {
-    padding: 4px 8px 4px 16px;
-  }
+div.playlist_text p {
+	margin-bottom: 6px;
+}
+.button {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 25px;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+}
+.button:hover {
+	background-color: green;
+}
 
 .floating_element {
 	position: relative;
@@ -105,11 +112,11 @@ div.content_section_text a:hover {
             Spotify Playlist
         </div>
         <div class="playlist_text">
-			<p> Song 1 </p>
-			<p> Song 2 </p>
-			<p> Song 3 </p>
-			<p> Song 4 </p>
-			<p> Song 5 </p>
+			<p> ?1 <button type="button" action="/cgi-bin/main.py">^</button></p> 
+			<p> ?2 </p>
+			<p> ?3 <form action="/cgi-bin/main.py"><button type="submit" name="b2" value="UP">^</button></form> </p>
+			<p> ?4 </p>
+			<p> ?5 </p>
 		</div>
 	</div>
 </div>

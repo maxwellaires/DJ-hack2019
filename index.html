@@ -106,7 +106,7 @@ div.content_section_text a:hover {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: none;/**/ /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
@@ -115,7 +115,7 @@ div.content_section_text a:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: #00000000;
+  background-color: #00550088;
 }
 
 /* Modal Content */
@@ -126,7 +126,9 @@ div.content_section_text a:hover {
   border: 1px solid #888;
   width: 40%;
 }
-
+button.searches{
+	background-color: #338844;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -168,18 +170,10 @@ div.content_section_text a:hover {
         </div>
         <div class="playlist_text">
 			<table>
-				<!--<tr>
-					<td><form class="updown" action="/cgi-bin/main.py"> ??RAT0
-							<button class="up" type="submit" name="??SONG0" value="UP">^</button>
-							<button type="submit" name="??SONG0" value="DOWN">v</button></form> </td>
-					<td>??SONG0</td>
-				</tr>-->
 				<!--ADDTOPLAY-->
 			</table>
 
-			<!-- Trigger/Open The Modal -->
 			<button id="myBtn">Add Song</button>
-
 			<!-- The Modal -->
 			<div id="myModal" class="modal">
 				<div class="modal-content">

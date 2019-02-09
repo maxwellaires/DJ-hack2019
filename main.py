@@ -34,9 +34,9 @@ def main(data):
             website = website.replace("?11",data)
 
     sortedRatings = sorted(ratings.items(),key=lambda x:x[1])
-    for (song,rating),count in zip(sortedRatings,range(len(sortedRatings)):
+    for (song,rating),count in zip(sortedRatings,range(len(sortedRatings))):
         website = website.replace(f"??SONG{count}",song)
-        website = website.replace(f"??RAT{count}",rating)
+        website = website.replace(f"??RAT{count}",str(rating))
 
     print(website)
 

@@ -1,11 +1,5 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <!--
-    Modified from the Debian original for Ubuntu
-    Last updated: 2016-11-16
-    See: https://launchpad.net/bugs/1288690
-  -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Democratic JukeBox, DJ</title>
@@ -18,7 +12,7 @@
   body, html {
     padding: 3px 3px 3px 3px;
 
-    background-color: #D8DBE2;
+    background-color: #000055;
 
     font-family: Verdana, sans-serif;
     font-size: 11pt;
@@ -45,54 +39,17 @@
     text-align: center;
   }
 
-  div.page_header {
-    height: 99px;
+div.page_header {
+	height: 60px;
     width: 100%;
-
-    background-color: #F5F6F7;
-  }
-
-  div.page_header span {
-    margin: 15px 0px 0px 50px;
-
+    background-color: #DDDDFF;
+}
+div.page_header span {
     font-size: 180%;
     font-weight: bold;
-  }
-
-  div.page_header img {
-    margin: 3px 0px 0px 40px;
-
-    border: 0px 0px 0px;
-  }
-
-  div.table_of_contents {
-    clear: left;
-
-    min-width: 200px;
-
-    margin: 3px 3px 3px 3px;
-
-    background-color: #FFFFFF;
-
-    text-align: left;
-  }
-
-  div.table_of_contents_item {
-    clear: left;
-
-    width: 100%;
-
-    margin: 4px 0px 0px 0px;
-
-    background-color: #FFFFFF;
-
-    color: #000000;
-    text-align: left;
-  }
-
-  div.table_of_contents_item a {
-    margin: 6px 0px 0px 6px;
-  }
+	text-align: center;
+	color: #000055;
+}
 
   div.content_section {
     margin: 3px 3px 3px 3px;
@@ -130,24 +87,14 @@
     padding: 4px 8px 4px 16px;
   }
 
-  div.section_header {
-    padding: 3px 6px 3px 6px;
-
-    background-color: #8E9CB2;
-
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 112%;
-    text-align: center;
-  }
-
-  div.section_header_red {
-    background-color: #CD214F;
-  }
-
-  div.section_header_grey {
-    background-color: #9F9386;
-  }
+div.playlist_header {
+	padding: 4px 18px 4px 24px;
+	background-color: #000055;
+	color: #DDDDFF;
+	font-weight: bold;
+	font-size: 115%;
+	text-align: center;
+}
 
   .floating_element {
     position: relative;
@@ -189,54 +136,26 @@
   div.validator {
   }
     </style>
-  </head>
-  <body>
-    <div class="main_page">
-      <div class="page_header floating_element">
-        <img src="/icons/ubuntu-logo.png" alt="Ubuntu Logo" class="floating_element"/>
-        <span class="floating_element">
-          Democrat Jukebox, DJ
+
+</head>
+<body>
+<div class="main_page">
+	<div class="page_header floating_element">
+        <span>
+          Democratic Jukebox, DJ
         </span>
-      </div>
-<!--      <div class="table_of_contents floating_element">
-        <div class="section_header section_header_grey">
-          TABLE OF CONTENTS
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#about">About</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#playlist">Playlist</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#scope">Scope</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#files">Config files</a>
-        </div>
-      </div>
--->
-      <div class="content_section floating_element">
-
-        <div class="content_section_text">
-          <p>BLAH = NOT BLAH BLAH = NOT BLAH BLAH = NOT BLAH BLAH = NOT BLAH BLAH = NOT BLAH</p>
-
-        </div>
-        <div class="section_header">
-          <div id="playlist"></div>
-                Spotify Playlist
+	</div>
+	<div class="content_section floating_element">
+		<div class="playlist_header">
+			<div id="playlist"></div>
+            Spotify Playlist
         </div>
         <div class="content_section_text">
-          <p> Song 1 </p>
-          <p> Song 2 </p>
-
-        </div>
-
-
-      </div>
-    </div>
-    <div class="validator">
-    </div>
-  </body>
+			<p> Song 1 </p>
+			<p> Song 2 </p>
+		</div>
+	</div>
+</div>
+</body>
 </html>
 

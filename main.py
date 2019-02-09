@@ -27,7 +27,6 @@ def main(data):
     f.close()
 
     user = cgi.escape(os.environ["REMOTE_ADDR"])
-    website = website.replace("?11", user)  
 
     print("Content-type: text/html\n\n")
     if data == None:
@@ -82,17 +81,16 @@ def main(data):
     f.write(json.dumps(ratings))
     f.close()
 
-    
     print(website)
 
 
 
 if __name__ == "__main__":
-    
+    request = os.getenv("REQUEST_METHOD")   
     if os.getenv("QUERY_STRING"):
         data = os.getenv("QUERY_STRING")
-    elif sys.stdin.isatty():
-        data = sys.stdin.read()    
+    elif request == "POST":
+        data = sys.stdin.read()
     else:
         data = None
     

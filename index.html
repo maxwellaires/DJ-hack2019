@@ -1,15 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+	<meta http-equiv="refresh" content="10" />
 <title>Democratic Jukebox</title>
 
 
 <style type="text/css" media="screen">
-  * {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-  }
+* {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
 
 body, html {
 	padding: 3px 3px 3px 3px;
@@ -117,7 +118,11 @@ div.content_section_text a:hover {
 }
 
 </style>
-
+<script>
+function pop() {
+    prompt("Enter Song", "Text");
+}
+</script>
 </head>
 <body>
 <div class="main_page">
@@ -139,11 +144,11 @@ div.content_section_text a:hover {
 				</tr>-->
 				<!--ADDTOPLAY-->
 			</table>
-			<p><form action="/cgi-bin/main.py">
+			<p><form action="/cgi-bin/main.py" method="POST">
 					<input type="text" name="song">
 					<button type="submit" name="add" value="ADD">ADD</button></form>
+				<button onclick="pop()">ADD2</button>
 			</p>
-			?11,   ?12
 		</div>
 	</div>
 </div>

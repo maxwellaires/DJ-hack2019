@@ -4,6 +4,7 @@ import cgi
 import os
 import json
 import re
+import sys
 
 def buildRatings(songs):
     ratings = dict([(song,0) for song in songs])
@@ -70,7 +71,7 @@ def main(data):
             else:
                 downselect = ' class = "selected" '
         website = website.replace("<!--ADDTOPLAY-->",  
-			f'<tr><td><form class="updown" action="/cgi-bin/main.py"> {rating} ' +
+			f'<tr><td><form class="updown" action="/cgi-bin/main.py" method="POST"> {rating} ' +
 		    '<button ' + upselect + f'type="submit" name="{song}" value="UP">^</button> ' +
 			'<button ' + downselect + f'type="submit" name="{song}" value="DOWN">v</button></form></td>' +
             f"<td>{song}</td></tr>" + "<!--ADDTOPLAY-->")
@@ -81,16 +82,20 @@ def main(data):
     f.write(json.dumps(ratings))
     f.close()
 
+    
     print(website)
-    print("<META HTTP-EQUIV=refresh; CONTENT='0;URL=http://localhost/cgi-bin/main.py' />")
+
 
 
 if __name__ == "__main__":
     
     if os.getenv("QUERY_STRING"):
         data = os.getenv("QUERY_STRING")
+    elif sys.stdin.isatty():
+        data = sys.stdin.read()    
     else:
         data = None
+    
 
     main(data)
 

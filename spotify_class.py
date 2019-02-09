@@ -5,6 +5,7 @@ import webbrowser
 import re
 import json
 import time
+from pprint import *
 
 #######################################
 ##          EXCEPTIONS               ##
@@ -77,6 +78,7 @@ class Spotify_Client(object):
 
         print()
         resp = input("Enter the URL that you were redirected to: ")
+        time.sleep(2)
         print()
         m = re.search('code=(.*)\&state', resp)
         
@@ -179,12 +181,34 @@ class Spotify_Client(object):
         # if the status code is not 201, do something else.
         print(r.status_code)
 
+    def add_track_in_consideration(self, track_uri):
+        '''
+        adds the given track one under consideration - up to 20.
+        '''
+
+        # add track to the dictionary file
+        fhand = open("info.json", "w+")
+        contents = fhand.read()
+        #  data = json.loads(contents)
+        pprint(contents)
+        pass
+
+    def pick_next_song(self, track_file):
+        '''
+        looks at at the json file and then picks the next song based on the max
+        number of upvotes
+
+        returns the corresponding track uri
+        '''
+        pass
+
 
         '''
         TBD
             - currently playing
             - pick upcoming song.
             - store tracks in json.
+        '''
                 
 
 

@@ -5,6 +5,10 @@ import os
 import json
 import re
 import sys
+from multiprocessing.connection import Listener
+from multiprocessing.connection import Client
+
+
 
 def clean(s):
     s = s.replace("+", " ")
@@ -13,6 +17,15 @@ def clean(s):
     return s
 
 def main(data):
+
+    client = Client(('localhost',6000), authkey = b'password')
+    listener = Listener(('localhost',7000), authkey = b'password')
+    """
+    use client to send data to be searched: client.send(search_query)
+    use listener to recieve data: listener.recv()
+    """
+
+
     f = open("/var/www/html/index.html","rt")
     website = f.read()
     f.close()
@@ -86,6 +99,9 @@ def main(data):
     f.truncate(0)
     f.write(json.dumps(ratings))
     f.close()
+    
+    listener.close()
+    client.close()
 
     print(website)
 

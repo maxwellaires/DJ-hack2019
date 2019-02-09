@@ -76,15 +76,17 @@ class Spotify_Client(object):
         # the request was successful. now to the next part
         webbrowser.open(r.url)
 
+        time.sleep(2)
+
         print()
         resp = input("Enter the URL that you were redirected to: ")
-        time.sleep(2)
         print()
         m = re.search('code=(.*)\&state', resp)
         
         if m != None:
             auth_code = m.groups()[0]
         else:
+            1 / 0
             #  TODO: raise an exception if authorization denied #
             pass
 
@@ -209,10 +211,29 @@ class Spotify_Client(object):
             - pick upcoming song.
             - store tracks in json.
         '''
-                
 
 
-        
+    def search_for_track(self, search_string):
+        '''
+        Returns a list of (song,artist,uri) for top 10 results 
+        '''
+        header = {"Authorization" : self.auth_bearer}
+        payload = { 'q' : search_string.replace(" ","%20"),
+                    'type' : 'track',
+                    'limit' : 10}
+
+        url = 'https://api.spotify.com/v1/search'
+
+        r = requests.get(url,params = payload, headers = header)
+        d = json.loads(r.content)
+        results = []
+        for i in range(10):
+            song = d['tracks']['items'][i]['name']
+            artist = d['tracks']['items'][i]['artists'][0]['name']
+            uri = d['tracks']['items'][i]['uri']
+            results.append((song,artist,uri))
+
+        return results
         
 
 
